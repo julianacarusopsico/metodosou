@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Sou — Direcionamento Profissional Baseado em Ciência</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #534AB7;
+            --primary-dark: #3C3489;
+            --primary-light: #EEEDFE;
+            --secondary: #0F6E56;
+            --accent: #D85A30;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f9f8f6;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            background: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 32px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(83, 74, 183, 0.05) 0%, rgba(15, 110, 86, 0.05) 100%);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: rgba(15, 110, 86, 0.1);
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(83, 74, 183, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+        }
+
+        /* SECTION */
+        section {
+            padding: 80px 0;
+        }
+
+        section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        section > p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        /* PROBLEM SECTION */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .problem-item {
+            background: var(--primary-light);
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .problem-item h3 {
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .problem-item p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* FASES */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px;
+            margin-top: 50px;
+        }
+
+        .phase-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .phase-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .phase-num {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .phase-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .phase-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .phase-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* PACOTES */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 50px;
+        }
+
+        .package-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .package-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(83, 74, 183, 0.15);
+        }
+
+        .package-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .package-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 16px;
+        }
+
+        .package-badge.featured {
+            background: var(--primary);
+            color: white;
+        }
+
+        .package-card h3 {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .package-tagline {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .package-price {
+            display: none;
+        }
+
+        .package-period {
+            display: none;
+        }
+
+        .package-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .package-list li {
+            padding: 10px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .package-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .package-cta {
+            width: 100%;
+            background: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .package-cta:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* DIFERENCIAIS */
+        .diferentials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .differential {
+            display: flex;
+            gap: 24px;
+        }
+
+        .differential-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .differential h3 {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .differential p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* QUOTE */
+        .quote-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .quote-section p {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px;
+            margin-top: 50px;
+        }
+
+        .testimonial {
+            background: var(--bg-light);
+            padding: 32px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .testimonial p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        /* CTA FINAL */
+        .cta-final {
+            background: var(--primary);
+            color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-final h2 {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-final p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .problem-grid,
+            .phases-grid,
+            .diferentials-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">Método Sou</div>
+                <nav>
+                    <a href="#fases">O programa</a>
+                    <a href="#pacotes">Pacotes</a>
+                    <a href="#diferencial">Diferenciais</a>
+                    <a href="#contato">Contato</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-tag">Direcionamento profissional • Psicologia + Neuropsicologia</div>
+            <h1>Descubra quem você <span class="highlight">realmente é</span> no trabalho</h1>
+            <p>Um método estruturado em 5 fases baseado em avaliação psicológica real, para quem está perdido na carreira e quer clareza genuína — sem motivação vazia, com ciência de verdade.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Começar agora</button>
+                <button class="btn btn-secondary">Saber mais</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Você está aqui?</h2>
+            <p>Se a resposta é sim para qualquer uma dessas, este programa foi feito para você:</p>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <h3>Perdido(a) na carreira</h3>
+                    <p>Sente que está no lugar errado, mas não sabe exatamente por quê nem aonde ir. Já trocou de emprego várias vezes e sempre fica essa sensação de vazio.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>Cansado de achismos</h3>
+                    <p>Já fez testes de internet, conversou com amigos, ouviu muitas opiniões — mas nada bate com a realidade de quem você é de verdade.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>Nunca entendeu como funciona</h3>
+                    <p>Sabe que tem capacidades, mas não consegue encaixar tudo — suas forças, limitações, valores, comportamento — num plano que faça sentido.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>Quer base científica</h3>
+                    <p>Cansado(a) de motivação vazia. Quer respostas que vêm de avaliação real, não de achismos ou leitura de aura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fases">
+        <div class="container">
+            <h2>Como funciona: as 5 fases do programa</h2>
+            <p>Um método estruturado que vai de dentro para fora — do seu funcionamento psicológico e cognitivo real até um plano de ação estratégico.</p>
+            <div class="phases-grid">
+                <div class="phase-card">
+                    <div class="phase-num">1</div>
+                    <h3>Diagnóstico profundo</h3>
+                    <p>Avaliação técnica completa do seu funcionamento psicológico, cognitivo e comportamental — sem genéricos.</p>
+                    <div class="phase-tags">
+                        <span class="tag">Entrevista clínica</span>
+                        <span class="tag">Testes cognitivos</span>
+                        <span class="tag">Inventários de personalidade</span>
+                    </div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">2</div>
+                    <h3>Autoconhecimento guiado</h3>
+                    <p>Os dados técnicos traduzidos para sua vida real — identidade, valores, crenças limitantes, padrões de comportamento.</p>
+                    <div class="phase-tags">
+                        <span class="tag">Identidade pessoal</span>
+                        <span class="tag">Crenças limitantes</span>
+                        <span class="tag">Padrões comportamentais</span>
+                    </div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">3</div>
+                    <h3>Direcionamento profissional</h3>
+                    <p>Mapeamento de possibilidades de carreira compatíveis com quem você é — CLT, PJ, híbrido, perfil de liderança ou execução.</p>
+                    <div class="phase-tags">
+                        <span class="tag">Compatibilidade carreira</span>
+                        <span class="tag">Ambiente ideal</span>
+                        <span class="tag">Estilo de trabalho</span>
+                    </div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">4</div>
+                    <h3>Plano de ação estratégico</h3>
+                    <p>Sem isso o programa não fecha. Aqui o insight vira movimento — metas, competências, posicionamento profissional.</p>
+                    <div class="phase-tags">
+                        <span class="tag">Metas claras</span>
+                        <span class="tag">Plano prático</span>
+                        <span class="tag">Desenvolvimento de skills</span>
+                    </div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">5</div>
+                    <h3>Devolutiva final</h3>
+                    <p>Fechamento completo. Você sai com um dossiê pessoal — um documento que pode consultar pela vida toda.</p>
+                    <div class="phase-tags">
+                        <span class="tag">Devolutiva completa</span>
+                        <span class="tag">Dossiê pessoal</span>
+                        <span class="tag">Documento final</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="quote-section">
+        <p>"Você não precisa de mais motivação. Precisa de clareza — e clareza vem de autoconhecimento estruturado."</p>
+    </div>
+
+    <section id="pacotes">
+        <div class="container">
+            <h2>Os pacotes disponíveis</h2>
+            <p>Cada programa é personalizado. Escolha o que faz sentido para você e solicite um orçamento. Conversamos sobre suas necessidades e ajustamos.</p>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <span class="package-badge">Entrada</span>
+                    <h3>Explorar</h3>
+                    <p class="package-tagline">Primeiro passo para conhecer o programa</p>
+                    <p style="font-size: 14px; color: var(--text-light); margin-bottom: 32px;">1 sessão avulsa • 50 min</p>
+                    <ul class="package-list">
+                        <li>1 sessão individual de acolhimento</li>
+                        <li>Escuta ativa e mapeamento inicial</li>
+                        <li>Devolutiva ao final</li>
+                    </ul>
+                    <button class="package-cta">Solicitar orçamento</button>
+                </div>
+
+                <div class="package-card">
+                    <span class="package-badge">Acessível</span>
+                    <h3>Iniciar</h3>
+                    <p class="package-tagline">Para dar os primeiros passos com acompanhamento</p>
+                    <p style="font-size: 14px; color: var(--text-light); margin-bottom: 32px;">4 sessões</p>
+                    <ul class="package-list">
+                        <li>4 sessões individuais</li>
+                        <li>Avaliação de perfil psicológico</li>
+                        <li>Plano personalizado de evolução</li>
+                        <li>Suporte por mensagem</li>
+                    </ul>
+                    <button class="package-cta">Solicitar orçamento</button>
+                </div>
+
+                <div class="package-card featured">
+                    <span class="package-badge featured">Mais escolhido</span>
+                    <h3>Compreender</h3>
+                    <p class="package-tagline">Diagnóstico completo + autoconhecimento</p>
+                    <p style="font-size: 14px; color: var(--text-light); margin-bottom: 32px;">6 sessões • inclui relatório</p>
+                    <ul class="package-list">
+                        <li>Entrevista clínica + anamnese</li>
+                        <li>Avaliação psicológica personalizada</li>
+                        <li>Testes cognitivos e de personalidade</li>
+                        <li>Relatório de perfil completo</li>
+                        <li>Autoconhecimento guiado</li>
+                        <li>Suporte por mensagem</li>
+                    </ul>
+                    <button class="package-cta">Solicitar orçamento</button>
+                </div>
+
+                <div class="package-card">
+                    <span class="package-badge">Programa completo</span>
+                    <h3>Transformar</h3>
+                    <p class="package-tagline">As 5 fases — diagnóstico ao plano de ação</p>
+                    <p style="font-size: 14px; color: var(--text-light); margin-bottom: 32px;">até 10 sessões • dossiê final</p>
+                    <ul class="package-list">
+                        <li>Todas as 5 fases do programa</li>
+                        <li>Avaliação neuropsicológica</li>
+                        <li>Direcionamento profissional completo</li>
+                        <li>Plano de ação estratégico</li>
+                        <li>Dossiê pessoal (documento final)</li>
+                        <li>Sessão de devolutiva completa</li>
+                    </ul>
+                    <button class="package-cta">Solicitar orçamento</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Quem é Juliana Caruso</h2>
+            <p style="margin-bottom: 40px;">O Método Sou foi criado e é realizado por <strong>Juliana Caruso</strong>, psicóloga especializada em avaliação psicológica, neuropsicologia e psicologia organizacional.</p>
+            <div style="background: var(--bg-light); padding: 40px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                <p style="font-size: 16px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.8;">Sua atuação integra <strong>ciência psicológica com escuta clínica estratégica</strong> para ajudar pessoas que se sentem sobrecarregadas, desorganizadas ou em busca de direção a compreenderem melhor seu funcionamento cognitivo, emocional e comportamental. A partir disso, conduz processos estruturados que favorecem <strong>clareza, tomada de decisão e melhoria de desempenho</strong> no dia a dia.</p>
+                
+                <p style="font-size: 16px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.8;"><strong>Na avaliação psicológica e neuropsicológica:</strong> realiza processos completos e personalizados, investigando funções como memória, atenção, linguagem, funções executivas e raciocínio. Seu diferencial está em <strong>traduzir resultados técnicos em orientações práticas e aplicáveis</strong>, tornando o processo acessível e transformador.</p>
+                
+                <p style="font-size: 16px; color: var(--text-dark); line-height: 1.8;"><strong>Na psicologia organizacional:</strong> atua em diagnóstico organizacional, recrutamento e seleção, desenvolvimento de lideranças e saúde mental no trabalho — sempre com foco em <strong>resultados sustentáveis e alinhamento entre pessoas e ambiente profissional</strong>.</p>
+                
+                <p style="font-size: 16px; color: var(--primary); font-weight: 600; margin-top: 24px; line-height: 1.8;">Seu posicionamento é voltado para quem busca mais do que um diagnóstico: busca compreensão, direcionamento e evolução consistente.</p>
+            </div>
+        </div>
+    </section>
+        <div class="container">
+            <h2>Por que isso é diferente</h2>
+            <p>A maioria dos "programas de orientação de carreira" é baseada em achismos ou testes genéricos. Deveras é diferente.</p>
+            <div class="diferentials-grid">
+                <div class="differential">
+                    <div class="differential-icon">🔬</div>
+                    <div>
+                        <h3>Com base científica</h3>
+                        <p>Avaliação psicológica e neuropsicológica real, não questionários de internet. Cada resultado vem de instrumento validado.</p>
+                    </div>
+                </div>
+                <div class="differential">
+                    <div class="differential-icon">✓</div>
+                    <div>
+                        <h3>Sem achismos</h3>
+                        <p>Cada conclusão vem de análise clínica profunda e dados reais sobre como você funciona — cognitivamente e comportamentalmente.</p>
+                    </div>
+                </div>
+                <div class="differential">
+                    <div class="differential-icon">📋</div>
+                    <div>
+                        <h3>Método estruturado</h3>
+                        <p>5 fases bem definidas com entregáveis concretos. Você não só "conversa" — você sai com um documento tangível.</p>
+                    </div>
+                </div>
+                <div class="differential">
+                    <div class="differential-icon">📖</div>
+                    <div>
+                        <h3>Dossiê pessoal para a vida toda</h3>
+                        <p>Ao encerrar o programa, você recebe um documento que pode consultar sempre — um mapa permanente de quem você é e como funciona.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Quem procura o Método Sou</h2>
+            <p>O programa foi pensado para quem está genuinamente perdido e quer clareza de verdade:</p>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p>"Troquei de emprego 4 vezes em 5 anos. Sabia que tinha algo errado, mas não entendia o quê. Deveras foi como dar um nome e um mapa para o que eu sentia."</p>
+                    <p class="testimonial-author">— Marina, 32 anos</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Sempre ouvi falar sobre 'seguir sua paixão', mas isso não me ajudava em nada. Aqui eu entendi como eu realmente funciono — e tudo fez sentido."</p>
+                    <p class="testimonial-author">— Ricardo, 28 anos</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Saí com um documento na mão que resume tudo sobre mim profissionalmente. É como ter um manual de instruções que posso consultar para sempre."</p>
+                    <p class="testimonial-author">— Juliana, 35 anos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-final">
+        <div class="container">
+            <h2>Pronto para se conhecer de verdade?</h2>
+            <p>Escolha seu pacote e marque a primeira sessão. Sua clareza começa aqui.</p>
+            <button class="btn btn-secondary" style="color: white; border-color: white;">Começar agora</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Método Sou — Direcionamento Profissional | Criado e realizado por Juliana Caruso, Psicóloga | <a href="#">Contato</a> | <a href="#">Política de Privacidade</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.querySelectorAll('.btn, .package-cta').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Ótimo! Em breve você será redirecionado para agendar sua sessão.');
+            });
+        });
+    </script>
+</body>
+</html>
